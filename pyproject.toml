@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "rhyme-trie"
+version = "0.1.0"
+description = ""
+authors = ["Kyle Anthony Williams <kyle.anthony.williams2@gmail.com>"]
+readme = "README.md"
+packages = [{include = "rhyme_trie"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+nltk = "^3.8.1"
+networkx = "^3.0"
+
+[tool.poetry.group.dev.dependencies]
+matplotlib = "^3.6.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
