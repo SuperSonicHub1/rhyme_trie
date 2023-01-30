@@ -1,5 +1,7 @@
 # rhyme_trie
 
+![Visualization of rhyme trie with 100 nodes](visual.png)
+
 A rhyming database implemented with a [trie](https://en.wikipedia.org/wiki/Trie) and the
 [CMU Pronouncing Dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict).
 Man, do I love data structures!
