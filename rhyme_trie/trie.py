@@ -4,6 +4,7 @@ Thanks to Jair for showing me tries and thanks to Kiera for the interesting chal
 Some code lifted from https://networkx.org/documentation/stable/auto_examples/graph/plot_morse_trie.html#sphx-glr-download-auto-examples-graph-plot-morse-trie-py 
 """
 
+from typing import List, Optional
 from nltk.corpus import cmudict
 import networkx as nx
 
@@ -25,7 +26,7 @@ for index, (spelling, pronunciation) in enumerate(pronunciations):
 	for i in range(len(stages) - 1):
 		rhyme_trie.add_edge(stages[i], stages[i + 1], phone=reversed_pronun[i])
 
-def rhymes(word_1: str, word_2: str) -> bool:
+def rhymes(word_1: str, word_2: str) -> Optional[List[str]]:
 	try:
 		word_1_pronunciations = pronunciations_dict[word_1.lower()]
 		word_2_pronunciations = pronunciations_dict[word_2.lower()]
@@ -34,17 +35,16 @@ def rhymes(word_1: str, word_2: str) -> bool:
 
 	for word_1_pronunciation in word_1_pronunciations:
 		for word_2_pronunciation in word_2_pronunciations:
-			if (
-				nx.lowest_common_ancestor(
-					rhyme_trie,
-					" ".join(reversed(word_1_pronunciation)),
-					" ".join(reversed(word_2_pronunciation))
-				)
-				!= ""
-			):
-				return True
+			ancestor = nx.lowest_common_ancestor(
+				rhyme_trie,
+				" ".join(reversed(word_1_pronunciation)),
+				" ".join(reversed(word_2_pronunciation))
+			)
 
-	return False
+			if (ancestor != ""):
+				return ancestor.split(" ")[::-1]
+
+	return None
 
 if __name__ == "__main__":
 	import matplotlib.pyplot as plt
